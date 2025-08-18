@@ -4,9 +4,10 @@ langchain-community==0.2.10
 langchain-openai==0.1.20
 langchain==0.2.12
 PyPDF2==3.0.1
-chromadb==0.5.5
+chromadb==0.4.24
 openai==1.40.6
 streamlit==1.37.1
 sentence-transformers==3.0.1
 hnswlib==0.8.0
+
 
