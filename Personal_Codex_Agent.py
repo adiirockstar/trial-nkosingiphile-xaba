@@ -1,15 +1,19 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
+from dotenv import load_dotenv
+import os
+import chromadb
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
-import PyPDF2
-import os
-import chromadb
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from PyPDF2 import PdfReader
 from pathlib import Path
-from dotenv import load_dotenv
 load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 # Initialize embeddings and LLM
@@ -61,13 +65,24 @@ def setup_vector_store(docs):
     Returns:
         Chroma: Initialized vector store persisted to ./chroma_db.
     """
-    texts = [doc[i:i+1000] for doc in docs for i in range(0, len(doc), 1000)] 
-    vector_store = Chroma.from_texts(
-        texts=texts,
-        embedding=embeddings,
-        persist_directory="./chroma_db"
-    )
-    return vector_store
+    try:
+        client = chromadb.Client()  # In-memory client for Streamlit Cloud
+        documents = load_documents()
+        if not documents:
+            print("Error: No documents available for vector store.")
+            return None
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+        chunks = text_splitter.split_text("\n".join(documents))
+        vector_store = Chroma.from_texts(
+            texts=chunks,
+            embedding=embeddings,
+            collection_name="personal_codex",
+            client=client
+        )
+        return vector_store
+    except Exception as e:
+        print(f"Chroma setup failed: {e}")
+        return None
 
 def setup_rag_chain(vector_store, mode):
     """
