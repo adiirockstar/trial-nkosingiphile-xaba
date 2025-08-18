@@ -33,7 +33,7 @@ def load_documents():
     base_dir = os.path.dirname(os.path.abspath(__file__))  # folder where script runs
     doc_paths = [
         "My content/Nkosingiphile_Xaba_CV.pdf",  
-        "My content/Nkosingiphile_Xaba_resume.pdf", 
+        "My content/Nkosingiphile_Xaba_Resume.pdf", 
         "My content/Nkosingiphile_motivation_letter.txt",
         "My content/LangChain_Agents.py",
         "My content/XBXNKO007_Xaba, Nkosingiphile Bayanda.pdf"
