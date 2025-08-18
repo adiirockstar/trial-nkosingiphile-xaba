@@ -30,7 +30,7 @@ def load_documents():
     Raises:
         FileNotFoundError: If any document path does not exist.
     """
-    docs = []
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # folder where script runs
     doc_paths = [
         "My content/Nkosingiphile_Xaba_CV.pdf",  
         "My content/Nkosingiphile_Xaba_resume.pdf", 
@@ -39,21 +39,23 @@ def load_documents():
         "My content/XBXNKO007_Xaba, Nkosingiphile Bayanda.pdf"
     ]
     
-    for path in doc_paths:
+    docs = []
+    for relative_path in doc_paths:
+        path = os.path.join(base_dir, relative_path)  
         if not os.path.exists(path):
             raise FileNotFoundError(f"Document not found: {path}")
+        
         if path.endswith(".pdf"):
             with open(path, "rb") as file:
                 pdf_reader = PyPDF2.PdfReader(file)
-                text = ""
-                for page in pdf_reader.pages:
-                    text += page.extract_text() or ""
+                text = "".join(page.extract_text() or "" for page in pdf_reader.pages)
                 docs.append(text)
         else:
             with open(path, "r", encoding="utf-8") as file:
                 docs.append(file.read())
     
     return docs
+
 
 def setup_vector_store(docs):
     """
