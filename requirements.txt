@@ -8,3 +8,5 @@ chromadb==0.5.5
 openai==1.40.6
 streamlit==1.37.1
 sentence-transformers==3.0.1
+hnswlib==0.8.0
+sqlite3
