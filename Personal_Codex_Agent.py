@@ -9,8 +9,9 @@ import PyPDF2
 import os
 import chromadb
 from pathlib import Path
-
-os.environ["OPENAI_API_KEY"] = "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"
+from dotenv import load_dotenv
+load_dotenv()
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 # Initialize embeddings and LLM
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.9)
