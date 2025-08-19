@@ -1,6 +1,15 @@
-
+import os
 import streamlit as st
 from Personal_Codex_Agent import answer_question
+
+def save_uploaded_file(uploaded_file):
+    """Save uploaded file into 'My content/' directory."""
+    content_dir = "My content"
+
+    file_path = os.path.join(content_dir, uploaded_file.name)
+    with open(file_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
+    return file_path
 
 def main():
     """
@@ -58,6 +67,12 @@ def main():
     # Sidebar for settings
     with st.sidebar:
         st.title("Personal Codex Settings")
+        st.subheader("Upload a new document")
+        uploaded_file = st.file_uploader("Upload PDF, TXT, or PY file", type=["pdf", "txt", "py"])
+        if uploaded_file:
+            path = save_uploaded_file(uploaded_file)
+            st.success(f"File saved: {uploaded_file.name}")
+            
         tone = st.selectbox("Response Tone", [
             "Interview Mode",
             "Personal Storytelling Mode",
