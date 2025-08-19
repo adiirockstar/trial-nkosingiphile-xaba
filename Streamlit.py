@@ -60,32 +60,6 @@ def main():
             border-radius: 20px;
             padding: 10px;
         }
-        /* Circular image container */
-        .circular-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto;
-            border: 2px solid #333;
-            background-color: #000000;
-            position: relative;
-            color: white;
-            text-align: center;
-            font-size: 16px;
-        }
-        .circular-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .upload-text {
-            position: absolute;
-            z-index: 1;
-        }
         /* Rectangular bio container */
         .bio-container {
             background-color: #000000;
@@ -147,18 +121,6 @@ def main():
                 unsafe_allow_html=True
             )
 
-    uploaded_image = st.file_uploader("Upload your picture", type=["jpg", "png", "jpeg"], key="image_uploader")
-    if uploaded_image is not None:
-        st.markdown(
-            f'<div class="circular-image"><img src="data:image/jpeg;base64,{st.image(uploaded_image, output_format="JPEG", use_container_width=False, width=200)._get_base64()}"></div>',
-            unsafe_allow_html=True
-        )
-    else:
-        st.markdown(
-            '<div class="circular-image"><span class="upload-text">Upload your picture</span></div>',
-            unsafe_allow_html=True
-        )
-
     st.markdown(
         """
         <div class="bio-container">
@@ -195,9 +157,6 @@ def main():
             st.rerun()
         except Exception as e:
             st.error(f"Error processing your question: {e}")
-
-if __name__ == "__main__":
-    main()
 
 if __name__ == "__main__":
     main()
