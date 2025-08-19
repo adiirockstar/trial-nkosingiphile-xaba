@@ -100,9 +100,9 @@ def setup_rag_chain(vector_store, mode):
     mode_instructions = {
         "Interview Mode": "Answer in a professional, formal tone suitable for a job interview, focusing on clarity and relevance to my qualifications.",
         "Personal Storytelling Mode": "Answer in a reflective, narrative style, sharing personal insights and experiences as if telling a story.",
-        "Fast Facts Mode": "Answer in a concise, bullet-point or TL;DR format, summarizing key points efficiently.",
+        "Fast Facts Mode": "Answer in a concise, bullet-point or TL;DR format, summarizing key points efficiently. Begin with the skill/strength name followed by a proficiency level (if relevant) in bold.",
         "Humble Brag Mode": "Answer with confidence and enthusiasm, highlighting my achievements with a self-promotional tone while staying truthful.",
-        "Poetic Mode": "Answer in a lyrical, poetic style, weaving metaphors, alliteration, and vivid imagery. Write as a short poem or lyrical prose."
+        "Poetic Mode": "Answer in Metaphors, similes, and vivid imagery to paint ideas as pictures. Use alliteration, rhythm, and flow to create musicality in the language. Use emotion-driven language that stirs feeling, even for abstract topics. Keep it short."
     }
 
     mode_instruction = mode_instructions.get(mode, mode_instructions["Personal Storytelling Mode"])
