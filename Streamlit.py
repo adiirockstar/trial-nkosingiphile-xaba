@@ -73,6 +73,21 @@ def main():
             margin-right: auto;
             color: white;
         }
+        /* Centered title and description */
+        .title-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        /* Sidebar border */
+        .stSidebar {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #f8f9fa;
+        }
         </style>
         """,
         unsafe_allow_html=True
@@ -116,6 +131,10 @@ def main():
                     background-color: #000000;
                     border-color: #555;
                 }
+                .stSidebar {
+                    background-color: #333;
+                    border-color: #555;
+                }
                 </style>
                 """,
                 unsafe_allow_html=True
@@ -131,8 +150,15 @@ def main():
         unsafe_allow_html=True
     )
 
-    st.title("Personal Codex Agent")
-    st.write("Ask questions about me as a candidate, and I'll answer based on my documents.")
+    st.markdown(
+        """
+        <div class="title-container">
+            <h1>Personal Codex Agent</h1>
+            <p>Ask questions about me as a candidate, and I'll answer based on my documents.</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
     for message in st.session_state.messages:
