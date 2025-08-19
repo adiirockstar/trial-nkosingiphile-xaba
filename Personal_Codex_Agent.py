@@ -15,10 +15,17 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 import PyPDF2
 from pathlib import Path
 load_dotenv()
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+def get_openai_api_key():
+    """
+    Get the OpenAI API key from environment variables.
+    Raises an error if not found.
+    """
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("OpenAI API key not found. Please set it in the Streamlit sidebar.")
+    return api_key
 # Initialize embeddings and LLM
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.9)
 
 def load_documents():
     """
@@ -139,7 +146,9 @@ Reasoning Process (Internal):
     )
 
     retriever = vector_store.as_retriever(search_kwargs={"k": 2})
-
+    api_key = get_openai_api_key()
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.9, api_key=api_key)
+    
     stuff_chain = create_stuff_documents_chain(llm, prompt_template)
 
     return create_retrieval_chain(retriever, stuff_chain), mode_instruction
