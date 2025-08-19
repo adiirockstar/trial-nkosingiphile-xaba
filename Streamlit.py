@@ -150,7 +150,7 @@ def main():
     uploaded_image = st.file_uploader("Upload your picture", type=["jpg", "png", "jpeg"], key="image_uploader")
     if uploaded_image is not None:
         st.markdown(
-            f'<div class="circular-image"><img src="data:image/jpeg;base64,{st.image(uploaded_image, output_format="JPEG", use_column_width=False, width=200)._get_base64()}"></div>',
+            f'<div class="circular-image"><img src="data:image/jpeg;base64,{st.image(uploaded_image, output_format="JPEG", use_container_width=False, width=200)._get_base64()}"></div>',
             unsafe_allow_html=True
         )
     else:
@@ -195,6 +195,9 @@ def main():
             st.rerun()
         except Exception as e:
             st.error(f"Error processing your question: {e}")
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
