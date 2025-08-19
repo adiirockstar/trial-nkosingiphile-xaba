@@ -31,21 +31,20 @@ def load_documents():
         FileNotFoundError: If any document path does not exist.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))  # folder where script runs
-    doc_paths = [
-        "My content/Nkosingiphile_Xaba_CV.pdf",  
-        "My content/Nkosingiphile_Xaba_Resume.pdf", 
-        "My content/Nkosingiphile_Motivation_letter.txt",
-        "My content/LangChain_Agents.py",
-        "My content/XBXNKO007_Xaba, Nkosingiphile Bayanda.pdf"
-    ]
+    content_dir = os.path.join(base_dir, "My content")
+    # doc_paths = [
+    #     "My content/Nkosingiphile_Xaba_CV.pdf",  
+    #     "My content/Nkosingiphile_Xaba_Resume.pdf", 
+    #     "My content/Nkosingiphile_Motivation_letter.txt",
+    #     "My content/LangChain_Agents.py",
+    #     "My content/XBXNKO007_Xaba, Nkosingiphile Bayanda.pdf"
+    # ]
     
     docs = []
-    for relative_path in doc_paths:
-        path = os.path.join(base_dir, relative_path)  
-        if not os.path.exists(path):
-            raise FileNotFoundError(f"Document not found: {path}")
-        
-        if path.endswith(".pdf"):
+    for filename in os.listdir(content_dir):
+        path = os.path.join(content_dir, filename)
+
+        if filename.endswith(".pdf"):
             with open(path, "rb") as file:
                 pdf_reader = PyPDF2.PdfReader(file)
                 text = "".join(page.extract_text() or "" for page in pdf_reader.pages)
