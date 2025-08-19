@@ -80,10 +80,8 @@ def main():
             margin: 0 auto;
             padding: 10px;
         }
-        /* Sidebar border with theme-adaptive background */
+        /* Sidebar with theme-adaptive background, no border */
         .stSidebar {
-            border: 1px solid #ccc;
-            border-radius: 10px;
             padding: 10px;
             margin: 10px;
             background-color: #f8f9fa; /* Light grey for Light theme */
@@ -137,7 +135,6 @@ def main():
                 }
                 .stSidebar {
                     background-color: #333;
-                    border-color: #555;
                 }
                 .stSidebar > div[data-testid="stSidebarContent"] {
                     background-color: #333;
