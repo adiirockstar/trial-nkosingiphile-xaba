@@ -39,14 +39,7 @@ def load_documents():
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))  # folder where script runs
     content_dir = os.path.join(base_dir, "My content")
-    # doc_paths = [
-    #     "My content/Nkosingiphile_Xaba_CV.pdf",  
-    #     "My content/Nkosingiphile_Xaba_Resume.pdf", 
-    #     "My content/Nkosingiphile_Motivation_letter.txt",
-    #     "My content/LangChain_Agents.py",
-    #     "My content/XBXNKO007_Xaba, Nkosingiphile Bayanda.pdf"
-    # ]
-    
+    os.makedirs(content_dir, exist_ok=True)
     docs = []
     for filename in os.listdir(content_dir):
         path = os.path.join(content_dir, filename)
@@ -55,7 +48,8 @@ def load_documents():
             with open(path, "rb") as file:
                 pdf_reader = PyPDF2.PdfReader(file)
                 text = "".join(page.extract_text() or "" for page in pdf_reader.pages)
-                docs.append(text)
+                if text.strip():
+                    docs.append(text)
         else:
             with open(path, "r", encoding="utf-8") as file:
                 docs.append(file.read())
