@@ -19,6 +19,8 @@ def main():
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    if "api_key" not in st.session_state:
+        st.session_state.api_key = ""
 
     st.markdown(
         """
@@ -87,6 +89,19 @@ def main():
 
     with st.sidebar:
         st.title("Personal Codex Settings")
+
+        # API Key input
+        st.subheader("API Key")
+        api_key_input = st.text_input(
+            "Enter your OpenAI API Key",
+            type="password",
+            value=st.session_state.api_key,
+            help="Your key will be stored only in this session."
+        )
+        if api_key_input:
+            st.session_state.api_key = api_key_input
+            os.environ["OPENAI_API_KEY"] = api_key_input  # make it available to Personal_Codex_Agent
+
         st.subheader("Upload a new document")
         uploaded_doc = st.file_uploader("Upload PDF, TXT, or PY file", type=["pdf", "txt", "py"], key="doc_uploader")
         if uploaded_doc:
@@ -163,15 +178,17 @@ def main():
         st.markdown('</div>', unsafe_allow_html=True)
 
     if submit_button and question_input:
-        try:
-            st.session_state.messages.append({"role": "user", "content": question_input})
-            result = answer_question(question_input, mode=tone)
-            answer = result if isinstance(result, str) else result.get("answer", str(result))
-            st.session_state.messages.append({"role": "assistant", "content": answer})
-            st.rerun()
-        except Exception as e:
-            st.error(f"Error processing your question: {e}")
+        if not st.session_state.api_key:
+            st.error("Please enter your OpenAI API key in the sidebar before asking a question.")
+        else:
+            try:
+                st.session_state.messages.append({"role": "user", "content": question_input})
+                result = answer_question(question_input, mode=tone)
+                answer = result if isinstance(result, str) else result.get("answer", str(result))
+                st.session_state.messages.append({"role": "assistant", "content": answer})
+                st.rerun()
+            except Exception as e:
+                st.error(f"Error processing your question: {e}")
 
 if __name__ == "__main__":
     main()
-
