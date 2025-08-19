@@ -35,7 +35,9 @@ def main():
             padding: 10px 15px;
             border-radius: 15px;
             margin: 10px 0;
-            max-width: 70%;
+            max
+
+-width: 70%;
             margin-left: auto;
             text-align: right;
         }
@@ -80,13 +82,13 @@ def main():
             margin: 0 auto;
             padding: 10px;
         }
-        /* Sidebar border */
+        /* Sidebar border with theme-adaptive background */
         .stSidebar {
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 10px;
             margin: 10px;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa; /* Default for Light theme */
         }
         </style>
         """,
