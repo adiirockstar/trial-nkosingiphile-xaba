@@ -73,14 +73,14 @@ def main():
             path = save_uploaded_file(uploaded_file)
             st.success(f"File saved: {uploaded_file.name}")
             
-        tone = st.selectbox(st.subheader("Response Tone"), [
+        tone = st.selectbox("Response Tone", [
             "Interview Mode",
             "Personal Storytelling Mode",
             "Fast Facts Mode",
             "Humble Brag Mode",
             "Poetic Mode"
         ])
-        theme = st.selectbox(st.subheader("Theme"), ["Light", "Dark"])
+        theme = st.selectbox("Theme", ["Light", "Dark"])
         if theme == "Dark":
             st.markdown(
                 """
