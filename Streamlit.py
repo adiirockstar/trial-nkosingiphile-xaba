@@ -80,16 +80,6 @@ def main():
             margin: 0 auto;
             padding: 10px;
         }
-        /* Sidebar with theme-adaptive background, no border */
-        .stSidebar {
-            padding: 10px;
-            margin: 10px;
-            background-color: #f8f9fa; /* Light grey for Light theme */
-        }
-        /* Target sidebar content container explicitly */
-        .stSidebar > div[data-testid="stSidebarContent"] {
-            background-color: #f8f9fa; /* Light grey for Light theme */
-        }
         </style>
         """,
         unsafe_allow_html=True
@@ -132,12 +122,6 @@ def main():
                 .bio-container {
                     background-color: #000000;
                     border-color: #555;
-                }
-                .stSidebar {
-                    background-color: #333;
-                }
-                .stSidebar > div[data-testid="stSidebarContent"] {
-                    background-color: #333;
                 }
                 </style>
                 """,
@@ -190,3 +174,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
