@@ -5,7 +5,7 @@ from Personal_Codex_Agent import answer_question
 def save_uploaded_file(uploaded_file):
     """Save uploaded file into 'My content/' directory."""
     content_dir = "My content"
-    os.makedirs(content_dir, exist_ok=True)  # Create directory if it doesn't exist
+    os.makedirs(content_dir, exist_ok=True)
     file_path = os.path.join(content_dir, uploaded_file.name)
     with open(file_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
@@ -15,14 +15,11 @@ def main():
     """
     Main function to run the Streamlit app for the Personal Codex Agent.
     """
-    # Set page layout for better presentation
     st.set_page_config(layout="centered")
 
-    # Initialize session state for chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Custom CSS for chat styling, circular image, rectangular bio, and sidebar container
     st.markdown(
         """
         <style>
@@ -74,16 +71,24 @@ def main():
             align-items: center;
             margin: 0 auto;
             border: 2px solid #333;
-            background-color: #f0f0f0;
+            background-color: #000000;
+            position: relative;
+            color: white;
+            text-align: center;
+            font-size: 16px;
         }
         .circular-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        .upload-text {
+            position: absolute;
+            z-index: 1;
+        }
         /* Rectangular bio container */
         .bio-container {
-            background-color: #f8f9fa;
+            background-color: #000000;
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
@@ -92,23 +97,14 @@ def main():
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
-        }
-        /* Rectangular sidebar container */
-        .sidebar-container {
-            background-color: #f8f9fa;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 10px;
+            color: white;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    # Sidebar with rectangular container
     with st.sidebar:
-        st.markdown('<div class="sidebar-container">', unsafe_allow_html=True)
         st.title("Personal Codex Settings")
         st.subheader("Upload a new document")
         uploaded_doc = st.file_uploader("Upload PDF, TXT, or PY file", type=["pdf", "txt", "py"], key="doc_uploader")
@@ -124,7 +120,6 @@ def main():
             "Poetic Mode"
         ])
         theme = st.selectbox("Theme", ["Light", "Dark"])
-        st.markdown('</div>', unsafe_allow_html=True)
         if theme == "Dark":
             st.markdown(
                 """
@@ -144,11 +139,7 @@ def main():
                     border-top: 1px solid #444;
                 }
                 .bio-container {
-                    background-color: #333;
-                    border-color: #555;
-                }
-                .sidebar-container {
-                    background-color: #333;
+                    background-color: #000000;
                     border-color: #555;
                 }
                 </style>
@@ -156,7 +147,6 @@ def main():
                 unsafe_allow_html=True
             )
 
-    # Image uploader and bio at the top of the main interface
     uploaded_image = st.file_uploader("Upload your picture", type=["jpg", "png", "jpeg"], key="image_uploader")
     if uploaded_image is not None:
         st.markdown(
@@ -165,10 +155,9 @@ def main():
         )
     else:
         st.markdown(
-            '<div class="circular-image"><img src="https://via.placeholder.com/200" alt="Placeholder"></div>',
+            '<div class="circular-image"><span class="upload-text">Upload your picture</span></div>',
             unsafe_allow_html=True
         )
-        st.write("Please upload an image.")
 
     st.markdown(
         """
@@ -180,11 +169,9 @@ def main():
         unsafe_allow_html=True
     )
 
-    # Main chat interface
     st.title("Personal Codex Agent")
     st.write("Ask questions about me as a candidate, and I'll answer based on my documents.")
 
-    # Display chat history
     st.markdown('<div class="chat-container">', unsafe_allow_html=True)
     for message in st.session_state.messages:
         if message["role"] == "user":
@@ -193,26 +180,18 @@ def main():
             st.markdown(f'<div class="assistant-message">{message["content"]}</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # Input form at the bottom
     with st.form(key="input_form", clear_on_submit=True):
         st.markdown('<div class="input-container">', unsafe_allow_html=True)
         question_input = st.text_input("Enter a question (e.g., 'What are your strongest technical skills?'):", key="question")
         submit_button = st.form_submit_button("Send")
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # Process input and display results
     if submit_button and question_input:
         try:
-            # Add user message to chat history
             st.session_state.messages.append({"role": "user", "content": question_input})
-            
-            # Get response from backend, passing the tone
             result = answer_question(question_input, mode=tone)
-            # Extract the answer string from the dictionary
             answer = result if isinstance(result, str) else result.get("answer", str(result))
             st.session_state.messages.append({"role": "assistant", "content": answer})
-            
-            # Rerun to display new messages
             st.rerun()
         except Exception as e:
             st.error(f"Error processing your question: {e}")
