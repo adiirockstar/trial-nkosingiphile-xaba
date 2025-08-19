@@ -86,11 +86,11 @@ def main():
             border-radius: 10px;
             padding: 10px;
             margin: 10px;
-            background-color: #f8f9fa; /* Light theme */
+            background-color: #f8f9fa; /* Light grey for Light theme */
         }
-        /* Ensure sidebar content inherits theme colors */
-        .stSidebar > div {
-            background-color: inherit;
+        /* Target sidebar content container explicitly */
+        .stSidebar > div[data-testid="stSidebarContent"] {
+            background-color: #f8f9fa; /* Light grey for Light theme */
         }
         </style>
         """,
@@ -139,7 +139,7 @@ def main():
                     background-color: #333;
                     border-color: #555;
                 }
-                .stSidebar > div {
+                .stSidebar > div[data-testid="stSidebarContent"] {
                     background-color: #333;
                 }
                 </style>
