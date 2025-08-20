@@ -4,8 +4,8 @@ The Personal Codex Agent is a Streamlit-based application that allows users to i
 
 ## **Features**
 
-**Document Upload**: Upload PDF, TXT, or PY files to the "My content" directory for processing.
-**Response Modes**: Choose from multiple response tones:
+-**Document Upload**: Upload PDF, TXT, or PY files to the "My content" directory for processing.
+-**Response Modes**: Choose from multiple response tones:
 **Interview Mode**: Professional and formal, ideal for job interviews.
 **Personal Storytelling Mode**: Reflective and narrative-driven.
 **Fast Facts Mode**: Concise, bullet-point summaries.
