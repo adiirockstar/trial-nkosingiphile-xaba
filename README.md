@@ -12,9 +12,9 @@ The Personal Codex Agent is a Streamlit-based application that allows users to i
 - **Poetic Mod**e: Vivid, metaphorical, and emotion-driven responses.
 
 
-**Theming**: Switch between Light and Dark themes for the Streamlit interface.
-**Chat Interface**: Interactive chat system to ask questions and receive answers based on document content.
-**Vector Store**: Uses Chroma to store and retrieve document embeddings for efficient question answering.
+- **Theming**: Switch between Light and Dark themes for the Streamlit interface.
+- **Chat Interface**: Interactive chat system to ask questions and receive answers based on document content.
+- **Vector Store**: Uses Chroma to store and retrieve document embeddings for efficient question answering.
 
 ## **Prerequisites**
 
@@ -28,14 +28,11 @@ Clone the repository:git clone https://github.com/Nkosingiphile18/personal-codex
 cd personal-codex-agent
 
 
-Create a virtual environment and activate it:python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+- Create a virtual environment and activate it:python -m venv venv
+- source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 
 **Install dependencies**:pip install -r requirements.txt
-
-
-Set up the .env file with your OpenAI API key:echo "OPENAI_API_KEY=your-api-key" > .env
 
 
 Create a directory named My content in the project root to store your documents (PDFs, TXT files, etc.).
@@ -81,7 +78,7 @@ Key dependencies include:
 - **python-dotenv**: For loading environment variables.
 
 Install all dependencies using:
-pip install streamlit langchain langchain-huggingface langchain-openai chromadb PyPDF2 python-dotenv
+pip install -r requirements.txt
 
 **Notes**
 
