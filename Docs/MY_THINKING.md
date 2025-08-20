@@ -147,7 +147,7 @@ Handles uploaded documents dynamically.
 
 Function: main() in Streamlit.py.
 
-**Development Notes**
+## **Development Notes**
 
 **Why LangChain?**
 Chosen for its robust RAG framework and integration with Hugging Face embeddings + OpenAI LLMs.
