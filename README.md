@@ -3,14 +3,13 @@
 The Personal Codex Agent is a Streamlit-based application that allows users to interact with a Retrieval-Augmented Generation (RAG) system. It answers questions about Nkosingiphile Xaba, a BSc Applied Statistics graduate from the University of Cape Town, by leveraging a collection of personal documents (PDFs, TXT files) stored in a Chroma vector database. The system uses LangChain, HuggingFace embeddings, and OpenAI's GPT-4o-mini model to provide contextually relevant and personalized responses in various tones, such as Interview Mode, Personal Storytelling Mode, and more.
 
 ## **Features**
-
-**Document Upload**: Upload PDF, TXT, or PY files to the "My content" directory for processing.
-**Response Modes**: Choose from multiple response tones:
-**Interview Mode**: Professional and formal, ideal for job interviews.
-**Personal Storytelling Mode**: Reflective and narrative-driven.
-**Fast Facts Mode**: Concise, bullet-point summaries.
-**Humble Brag Mode**: Confident and self-promotional.
-**Poetic Mod**e: Vivid, metaphorical, and emotion-driven responses.
+- **Document Upload**: Upload PDF, TXT, or PY files to the "My content" directory for processing.
+- **Response Modes**: Choose from multiple response tones:
+- **Interview Mode**: Professional and formal, ideal for job interviews.
+- **Personal Storytelling Mode**: Reflective and narrative-driven.
+- **Fast Facts Mode**: Concise, bullet-point summaries.
+- **Humble Brag Mode**: Confident and self-promotional.
+- **Poetic Mod**e: Vivid, metaphorical, and emotion-driven responses.
 
 
 **Theming**: Switch between Light and Dark themes for the Streamlit interface.
