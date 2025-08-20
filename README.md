@@ -1,90 +1,108 @@
-📖 **Personal Codex Agent**
-The Personal Codex Agent is an AI-powered assistant built with LangChain, Streamlit, and GPT that answers questions about you based on your CV, academic transcript, motivation letter, projects, and other documents.
-It acts like your personal knowledge base:
+Personal Codex Agent
+Overview
+The Personal Codex Agent is a Streamlit-based application that allows users to interact with a Retrieval-Augmented Generation (RAG) system. It answers questions about Nkosingiphile Xaba, a BSc Applied Statistics graduate from the University of Cape Town, by leveraging a collection of personal documents (PDFs, TXT files) stored in a Chroma vector database. The system uses LangChain, HuggingFace embeddings, and OpenAI's GPT-4o-mini model to provide contextually relevant and personalized responses in various tones, such as Interview Mode, Personal Storytelling Mode, and more.
 
-Reads your documents (PDF, TXT, PY) from the My content/ folder.
-Lets you upload new documents via the Streamlit app.
-Uses RAG (Retrieval-Augmented Generation) to ground all answers in your real experiences.
-Provides multiple response styles (Interview Mode, Humble Brag Mode, Poetic Mode, etc.).
-Refuses to hallucinate: if information is missing, it says: "Not found in the documents."
+Features
 
-🚀 **Features**
-
-Custom Knowledge Base → Ingests documents from My content/ + uploaded files.
-Multi-Tone Responses → Choose how answers should sound:
-🎙 Interview Mode → formal & professional
-✍️ Personal Storytelling → reflective & narrative
-⚡ Fast Facts → concise bullet points
-💪 Humble Brag → confident, self-promotional
-🎨 Poetic → metaphorical, emotional, and lyrical
+Document Upload: Upload PDF, TXT, or PY files to the "My content" directory for processing.
+Response Modes: Choose from multiple response tones:
+Interview Mode: Professional and formal, ideal for job interviews.
+Personal Storytelling Mode: Reflective and narrative-driven.
+Fast Facts Mode: Concise, bullet-point summaries.
+Humble Brag Mode: Confident and self-promotional.
+Poetic Mode: Vivid, metaphorical, and emotion-driven responses.
 
 
-Real-Time Uploads → Add new documents without restarting the app.
-Dark/Light Themes → Customize UI theme.
-Chat UI → Clean, chat-like interface with user & assistant message bubbles.
+Theming: Switch between Light and Dark themes for the Streamlit interface.
+Chat Interface: Interactive chat system to ask questions and receive answers based on document content.
+Vector Store: Uses Chroma to store and retrieve document embeddings for efficient question answering.
 
-🛠️ **Installation**
+Prerequisites
 
-Clone the repository
-git clone https://github.com/Nkosingiphile18/personal-codex-agent.git
+Python 3.8+
+OpenAI API key (set in a .env file or via Streamlit sidebar)
+Required Python packages (listed in requirements.txt)
+
+Installation
+
+Clone the repository:git clone https://github.com/Nkosingiphile18/personal-codex-agent
 cd personal-codex-agent
 
 
-**Create a virtual environment**
-python -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate      # Windows
+Create a virtual environment and activate it:python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 
-**Install dependencies**
-pip install -r requirements.txt
-
-**Dependencies include:**
-
-streamlit (UI)
-langchain, chromadb, langchain-openai, langchain-community, langchain-huggingface
-pysqlite3, PyPDF2, dotenv
+Install dependencies:pip install -r requirements.txt
 
 
-**Set your API key**
-Create a .env file in the repo root:
-enter it directly in the Streamlit sidebar at runtime.
+Set up the .env file with your OpenAI API key:echo "OPENAI_API_KEY=your-api-key" > .env
 
 
-▶️ **Running the App**
-Start Streamlit:
-streamlit run Streamlit.py
+Create a directory named My content in the project root to store your documents (PDFs, TXT files, etc.).
 
-This will open the app in your browser at https://personal-codex-agent-j3jlpeqwhrxdynqu8pxftm.streamlit.app/
-📂 Project Structure
-📦 personal-codex-agent
- ┣ 📂 My content/              # Put your CV, transcript, projects here (PDF/TXT/PY)
- ┣ 📜 Personal_Codex_Agent.py  # Core logic (RAG, vector store, LLM)
- ┣ 📜 Streamlit.py             # Web UI
- ┣ 📜 requirements.txt         # Dependencies
- ┗ 📜 README.md                # Project documentation
+Usage
 
-💡 **How It Works**
+Run the Streamlit app:streamlit run Streamlit.py
 
-Load documents → Reads PDFs & TXTs from My content/ + any new uploads.
-Chunk & Embed → Splits text into chunks, embeds with MiniLM-L6-v2.
-Store & Retrieve → Stores in Chroma DB, retrieves relevant chunks per query.
-Prompt & Generate → Feeds context into GPT (gpt-4o-mini) with a mode-specific style.
-Answer → If grounded in documents → answers; else → "Not found in the documents."
 
-📌 **Example Questions**
+Open the provided URL in your browser (typically https://personal-codex-agent-j3jlpeqwhrxdynqu8pxftm.streamlit.app/).
+In the sidebar:
+Enter your OpenAI API key.
+Upload documents (PDF, TXT, or PY files) to the "My content" directory.
+Select a response tone and theme.
 
-"What are your strongest technical skills?" → Interview Mode
-"Tell me about a time you solved a complex problem." → Storytelling Mode
-"List your programming languages." → Fast Facts Mode
-"What achievement are you most proud of?" → Humble Brag Mode
-"Describe your career journey as a poem." → Poetic Mode
 
-⚠️ **Notes**
+Ask a question in the chat interface, e.g., "What are your strongest technical skills?"
+The system will process the question using the RAG pipeline and respond based on the documents and selected tone.
+eg. The Response I got was(Interview mode):
+     "I consider my strongest technical skills to be in Statistics, Python, SQL, and AI development, particularly with frameworks like LangChain. My education in BSc Applied Statistics from the University of Cape Town has equipped me with a robust statistical foundation, which I have effectively applied in both academic and practical contexts.
+For instance, during my internship at Elixirr Digital, I developed a LangChain agent for movie review analysis. This project not only honed my programming skills in Python but also deepened my understanding of natural language processing. I faced challenges in ensuring the accuracy and relevance of sentiment analysis, which required meticulous attention to detail and iterative problem-solving. The successful deployment of this agent contributed to improved data insights for the team, illustrating my ability to leverage technical skills to facilitate impactful solutions.
 
-All documents must be placed in My content/ or uploaded in-app.
-Only PDF, TXT, and PY files are supported.
-The agent does not fabricate answers – it will only answer based on your content.
+Furthermore, my proficiency in SQL allows me to manipulate and analyze large datasets efficiently. I often utilize Tableau for data visualization, which complements my analytical capabilities and enables me to present complex information in a clear, engaging manner.
 
-📜 **License**
-MIT License. Free to use and modify.
+Overall, my technical skill set is reinforced by my soft skills—critical thinking, time management, and adaptability—which enable me to navigate complexities and drive innovation effectively, as evidenced by my project successes and academic achievements."
+
+Project Structure
+
+Personal_Codex_Agent.py: Core logic for loading documents, setting up the Chroma vector store, and creating the RAG chain for question answering.
+Streamlit.py: Streamlit frontend for user interaction, including file uploads, chat interface, and theme customization.
+My content/: Directory to store user-uploaded documents (created automatically if it doesn't exist).
+.env: Environment file for storing the OpenAI API key.
+
+Dependencies
+Key dependencies include:
+
+streamlit: For the web interface.
+langchain: For building the RAG pipeline.
+langchain-huggingface: For embeddings using the all-MiniLM-L6-v2 model.
+langchain-openai: For interacting with OpenAI's GPT-4o-mini model.
+chromadb: For the vector database.
+PyPDF2: For extracting text from PDF files.
+python-dotenv: For loading environment variables.
+
+Install all dependencies using:
+pip install streamlit langchain langchain-huggingface langchain-openai chromadb PyPDF2 python-dotenv
+
+Notes
+
+Ensure documents are placed in the My content directory before running the app, or upload them via the Streamlit interface.
+The application requires a valid OpenAI API key to function.
+If no documents are found or an error occurs during vector store setup, the system will display an error message.
+The Chroma vector store is in-memory for compatibility with Streamlit Cloud.
+
+Limitations
+
+Only supports PDF, TXT, and PY files for document processing.
+Requires an active internet connection for OpenAI API calls.
+Response quality depends on the content and quality of uploaded documents.
+
+Future Improvements
+
+Add support for additional document formats (e.g., DOCX, MD).
+Implement persistent storage for the Chroma vector store.
+Enhance error handling for document processing.
+Add more response modes or customization options for the prompt template.
+
+License
+This project is licensed under the MIT License.
