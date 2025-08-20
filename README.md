@@ -43,14 +43,18 @@ Run the Streamlit app:streamlit run Streamlit.py
 
 
 Open the provided URL in your browser (typically https://personal-codex-agent-j3jlpeqwhrxdynqu8pxftm.streamlit.app/).
+
+
 In the sidebar:
-Enter your OpenAI API key.
-Upload documents (PDF, TXT, or PY files) to the "My content" directory.
-Select a response tone and theme.
+- Enter your OpenAI API key.
+- Upload documents (PDF, TXT, or PY files) to the "My content" directory.
+- Select a response tone and theme.
 
 
 Ask a question in the chat interface, e.g., "What are your strongest technical skills?"
 The system will process the question using the RAG pipeline and respond based on the documents and selected tone.
+
+
 eg. The Response I got was(Interview mode):
 - "I consider my strongest technical skills to be in Statistics, Python, SQL, and AI development, particularly with frameworks like LangChain. My education in BSc Applied Statistics from the University of Cape Town has equipped me with a robust statistical foundation, which I have effectively applied in both academic and practical contexts.
 For instance, during my internship at Elixirr Digital, I developed a LangChain agent for movie review analysis. This project not only honed my programming skills in Python but also deepened my understanding of natural language processing. I faced challenges in ensuring the accuracy and relevance of sentiment analysis, which required meticulous attention to detail and iterative problem-solving. The successful deployment of this agent contributed to improved data insights for the team, illustrating my ability to leverage technical skills to facilitate impactful solutions.
